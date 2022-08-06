@@ -5,7 +5,7 @@ const router = Router({ strict: true });
 const { isValidToken } = require("./middleware");
 
 router.post("/login", loginController.login);
-router.get("/products", isValidToken, productsController.getAllProducts);
+router.get("/products",isValidToken,productsController.getAllProducts);
 router.get("/product/:id", isValidToken, productsController.getProduct);
 
 

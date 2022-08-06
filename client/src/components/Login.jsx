@@ -23,9 +23,14 @@ const Login = () => {
     },[isLogin])
 
     const handleSubmit = async () => {
+        try {
+            dispatch(LoginAction(user));
+        } catch (error) {
+            console.log(error);
+        }
         // const existedUser = registeredUsers.filter(item => (item.email == user.email) && (item.password == user.password))
         // if (existedUser.length > 0) {
-            dispatch(LoginAction(user));
+           
             // navigate('/');
         // }
         // else {
