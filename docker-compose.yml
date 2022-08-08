@@ -1,0 +1,37 @@
+version: '3.7'
+
+services:
+
+  react-client:
+
+    image: react-app
+
+    build: ./client
+
+    stdin_open: true
+
+    ports:
+
+      - "3000:3000"
+
+    volumes:
+
+      - ./client:/app
+
+      - ./app/node_modules
+
+  server:
+
+    image: api-server
+
+    build: ./server
+
+    ports:
+
+      - "3001:3001"
+
+    volumes:
+
+      - ./server:/app
+
+      - ./app/node_modules
