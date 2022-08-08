@@ -15,28 +15,28 @@ const Cart = () => {
     }
 
     return (
-        <div className={cartItems.length > 0 ? 'bg-gray cart-content' : 'bg-white'} >
+        <div className={cartItems?.length > 0 ? 'bg-gray cart-content' : 'bg-white'} >
             {
-                cartItems.length > 0 && (
+                cartItems?.length > 0 && (
                     <div className='cart-header bg-white p-3 mt-3'>
-                        <h5>My Cart <small>({cartItems.length} Items)</small></h5>
+                        <h5>My Cart <small>({cartItems?.length} Items)</small></h5>
                     </div>
                 )
             }
             {
-                cartItems.map(item => (
-                    <div className='card mt-2 p-3' key={item.id}>
+                cartItems?.map(item => (
+                    <div className='card mt-2 p-3' key={item?.id}>
                         <div className='d-flex'>
                             <div className='d-flex mr-2' onClick={()=>{removeItem(item)}}>
                                 <p className='text-danger'>X</p>
                             </div>
-                            <img height='70px' src={item.imageURL} alt={item.id} />
+                            <img height='70px' src={item?.imageURL} alt={item.id} />
                             <div className='ml-3'>
-                                <h6><strong>{item.name}</strong></h6>
+                                <h6><strong>{item?.name}</strong></h6>
                                 <p className='d-flex'><span className='quantity-btn' onClick={() => { dispatch(REMOVE_FROM_CART(item)) }}>-</span>{item.quantity}<span className='quantity-btn' onClick={() => { dispatch(ADDED_TO_CART(item)) }}>+</span> <span className='ml-3 mr-3'>X</span> Rs{item.price} </p>
                             </div>
                             <div className='total ml-auto'>
-                                <p>Rs {item.quantity * item.price}</p>
+                                <p>Rs {item?.quantity * item?.price}</p>
                             </div>
 
                         </div>
@@ -44,10 +44,10 @@ const Cart = () => {
                 ))
             }
             {
-                cartItems.length > 0 ? (
+                cartItems?.length > 0 ? (
                     <>
                         <div className='p-3 bg-white mb-5 cheaper-sec d-flex align-items-center mt-2' >
-                            <img src='/static/images/lowest-price.png' alt='lowest' />
+                            <img  data- testid='productImage' src='/static/images/lowest-price.png' alt='lowest' />
                             <span className='ml-3'>You won't find it cheaper anywhere</span>
                         </div>
                         <div className='checkout-footer mt-5  p-3'>

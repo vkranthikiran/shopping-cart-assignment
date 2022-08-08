@@ -21,9 +21,7 @@ const Login = () => {
     }
 
     useEffect(() => {
-        console.log(localStorage.getItem('isLogin')=='true');
         if (localStorage.getItem('isLogin')=='true'){
-            console.log('hi');
             navigate('products');
         }
     }, [isLogin])

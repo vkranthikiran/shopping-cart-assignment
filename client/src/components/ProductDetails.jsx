@@ -7,7 +7,7 @@ import { ADDED_TO_CART, REMOVE_FROM_CART } from '../redux/Action_creators/CartAc
 import { useState } from 'react';
 function ProductDetails() {
     let { id } = useParams();
-    const { product } = useSelector(state => state.products)
+    const product = useSelector(state => state?.products?.product)
     const [singleProduct, setProduct] = useState({})
     const dispatch = useDispatch();
     useEffect(() => {
@@ -15,13 +15,15 @@ function ProductDetails() {
     }, [])
 
     useEffect(() => {
-        product.quantity=1
-        setProduct({ ...product });
+        if(product){
+            product.quantity = 1
+            setProduct({ ...product });
+        }
     }, [product])
     const handleAddToCart = () => {
-        console.log(singleProduct,'before');
+        console.log(singleProduct, 'before');
         dispatch(ADDED_TO_CART(singleProduct))
-      }
+    }
     const changeQuantity = (type) => {
         let data = singleProduct
         if (type == 'inc') {
@@ -41,18 +43,18 @@ function ProductDetails() {
     }
 
     return (
-        <div className='react-container content '>
+        <div className='react-container content ' data-testid='productCard'>
             <div className='row '>
                 <div className='col-6 mt-3'>
-                    <img src={singleProduct?.imageURL} className='img' width='100%' height={'90%'} alt={singleProduct?.name} />
+                    <img src={singleProduct?.imageURL} data-testid='productImg' className='img' width='100%' height={'90%'} alt={singleProduct?.name} />
                 </div>
                 <div className='col-6 mt-3'>
-                    <h6><strong>{singleProduct?.name}</strong></h6>
-                    <p>{singleProduct?.description}</p>
-                    <p><strong>MRP RS {singleProduct?.price}</strong></p>
-                    <p>Stock : <strong>{singleProduct?.stock}</strong> Units Remaining</p>
-                    <p className='d-flex'><span className='quantity-btn' onClick={() => { changeQuantity('dec') }}>-</span>{singleProduct.quantity}<span className='quantity-btn' onClick={() => { changeQuantity('inc') }}>+</span>  </p>
-                    <button className='btn btn-info' type='button' onClick={()=>{handleAddToCart()}}>Add to cart</button>
+                    <h6><strong data-testid='productName'>{singleProduct?.name}</strong></h6>
+                    <p data-testid='productDesc'>{singleProduct?.description}</p>
+                    <p><strong data-testid='productPrice'>MRP RS {singleProduct?.price}</strong></p>
+                    <p>Stock : <strong data-testid='productStock'>{singleProduct?.stock}</strong> Units Remaining</p>
+                    <p className='d-flex'><span className='quantity-btn' data-testid='productDecr' onClick={() => { changeQuantity('dec') }}>-</span><span data-testid='quantity'>{singleProduct.quantity}</span><span className='quantity-btn' data-testid='productInc' onClick={() => { changeQuantity('inc') }}>+</span>  </p>
+                    <button className='btn btn-info' type='button' onClick={() => { handleAddToCart() }}>Add to cart</button>
                 </div>
             </div>
         </div>
