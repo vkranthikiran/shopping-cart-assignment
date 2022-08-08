@@ -75,14 +75,14 @@ const Navbar = () => {
                         !isLogin ? (
                             <div className="d-flex auth-sec">
                                 <NavLink to="/" className='mr-2'>
-                                    Signin
+                                    Login
                                 </NavLink>
-                                <NavLink to="register" className='mr-2'>
+                                {/* <NavLink to="register" className='mr-2'>
                                     Register
-                                </NavLink>
+                                </NavLink> */}
                             </div>
                         ) : (
-                            <h6 className='mr-3' onClick={() => { logout() }}>Log out</h6>
+                            <h6 className='mr-3 logout-cursor' onClick={() => { logout() }}>Logout</h6>
                         )
 
                     }

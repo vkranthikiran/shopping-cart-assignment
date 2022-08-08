@@ -16,6 +16,10 @@
     img {
       height: 30px;
     }
+    cursor: pointer;
+  }
+  .logout-cursor{
+    cursor: pointer;
   }
 }
 
@@ -134,7 +138,7 @@
         font-weight: 600;
       }
     }
-
+    
     .card-footer {
       border: none;
 
@@ -146,7 +150,7 @@
         padding: auto 20px;
       }
     }
-  }
+  } 
 }
 
 .bg-gray {
@@ -249,10 +253,13 @@ input:not(:focus):valid~.floating-label {
   border-radius: 100%;
   margin: auto 10px;
   color: white;
+  cursor: pointer;
 }
 .auth-sec{
   a{
     color:rgba(0, 0, 0, .7) ;
   }
 }
-
+.cancel{
+  cursor: pointer;
+}

@@ -42,7 +42,7 @@ const Login = () => {
             <div className='row justify-content-center ' >
                 <div className='col-sm-4 mb-3'>
                     <h4><strong>Login</strong></h4>
-                    <small><strong>Get access to your Orders ,Whishlist and Recomendations</strong></small>
+                    <small><strong>Get access to your Orders ,Wishlist and Recomendations</strong></small>
                 </div>
                 <div className='col-sm-4 '>
                     <form onSubmit={(e) => { e.preventDefault(); handleSubmit() }}>
