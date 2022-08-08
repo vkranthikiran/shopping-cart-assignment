@@ -1,9 +1,9 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react"
 import Products from "../components/ProductsList"
+import '@testing-library/jest-dom'
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import configureStore from 'redux-mock-store'
-const initialState = { output: 10 };
 import thunk from 'redux-thunk'
 const middlewares = [thunk]
 const mockStore = configureStore(middlewares)
@@ -20,13 +20,17 @@ const items = [
     },
 ];
 let store;
-test('product card is present',async()=>{
-    store = mockStore(initialState);
-    render(
-        <Router>
-            <Provider store={store}>
-                <Products />
-            </Provider>
-        </Router>
-    )
+store = mockStore({ products: { products: [...items] }});
+function renderWithProviders(ui, { reduxState } = {}) {
+    return render(<Router><Provider store={store}>{ui}</Provider></Router>);
+}
+test('it should', async () => {
+    const {getAllByTestId } = await renderWithProviders(<Products />, {
+        store: { products: { products: [...items] } }
+    });
+    getAllByTestId('productCard');
+    getAllByTestId('productImage');
+    getAllByTestId('productName');
+    getAllByTestId('productDesc');
+    getAllByTestId('productPrice')
 })

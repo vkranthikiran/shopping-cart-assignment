@@ -21,6 +21,11 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use("/api", require("./routes"))
+app.get('/', (req, res) => {// users/name?name=Alex
+    return res.send(
+      `Hi !`,
+    ); // How are you Alex
+  }); 
 
 // app.use(
 //     jwt({

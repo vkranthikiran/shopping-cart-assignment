@@ -25,15 +25,15 @@ const Cart = () => {
             }
             {
                 cartItems?.map(item => (
-                    <div className='card mt-2 p-3' key={item?.id}>
+                    <div className='card mt-2 p-3' data-testid='cartCard' key={item?.id}>
                         <div className='d-flex'>
                             <div className='d-flex mr-2 ' onClick={()=>{removeItem(item)}}>
-                                <strong><p className='text-danger cancel'>X</p></strong>
+                                <strong><p data-testid='removeCart' className='text-danger cancel'>X</p></strong>
                             </div>
-                            <img height='70px' src={item?.imageURL} alt={item.id} />
+                            <img height='70px' data-testid='cartImg' src={item?.imageURL} alt={item.id} />
                             <div className='ml-3'>
-                                <h6><strong>{item?.name}</strong></h6>
-                                <p className='d-flex'><span className='quantity-btn' onClick={() => { dispatch(REMOVE_FROM_CART(item)) }}>-</span>{item.quantity}<span className='quantity-btn' onClick={() => { dispatch(ADDED_TO_CART(item)) }}>+</span> <span className='ml-3 mr-3'>X</span> Rs{item.price} </p>
+                                <h6><strong data-testid='cartName'>{item?.name}</strong></h6>
+                                <p className='d-flex'><span data-testid='decrementBtn' className='quantity-btn' onClick={() => { dispatch(REMOVE_FROM_CART(item)) }}>-</span><span data-testid='cartQty'>{item.quantity}</span><span className='quantity-btn' data-testid='incrementBtn' onClick={() => { dispatch(ADDED_TO_CART(item)) }}>+</span> <span className='ml-3 mr-3'>X</span> Rs{item.price} </p>
                             </div>
                             <div className='total ml-auto'>
                                 <p>Rs {item?.quantity * item?.price}</p>

@@ -120,7 +120,6 @@ test('product Decr click',async()=>{
     </Router>)
     const quantity=await screen.getByTestId(/quantity/i)
     const element=screen.getByTestId(/productDecr/i)
-
     fireEvent.click(element);
     expect(quantity).toHaveTextContent("");
 })
