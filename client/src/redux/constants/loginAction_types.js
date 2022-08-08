@@ -1,3 +1,4 @@
 export const LoginActionTypes={
-    LOGIN:'LOGIN'
+    LOGIN:'LOGIN',
+    LOGOUT:'LOGOUT'
 }

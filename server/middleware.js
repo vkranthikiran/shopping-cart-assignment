@@ -15,7 +15,6 @@ exports.isValidToken = async (req, res, next) => {
                 next();
             }
         }
-
     } catch (err) {
         return "";
     }

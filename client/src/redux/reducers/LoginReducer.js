@@ -2,13 +2,13 @@ import { useNavigate } from "react-router-dom"
 import { LoginActionTypes } from "../constants/loginAction_types"
 
 const initialState={
-    user:{}
+    isLogin:false
 }
 export const LoginReducer=(state=initialState,{type,payload})=>{
     if(type==LoginActionTypes.LOGIN){
-        return {...state,user:{...payload}}
+        return {...state, isLogin:payload}
     }
     else{
-        return {...state}
+        return {...state , isLogin:payload} 
     }
 }

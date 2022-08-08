@@ -13,3 +13,10 @@ export const REMOVE_FROM_CART=(item)=>{
         payload:item
     }
 }
+
+export const DELETE_ITEM=(item)=>{
+    return{
+        type:CartActionTypes.DELETE_FROM_CART,
+        payload:item
+    }
+}

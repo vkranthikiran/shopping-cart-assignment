@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { NavLink, useNavigate } from 'react-router-dom'
+import { Logout } from '../redux/Action_creators/LoginActions';
 import Cart from './Cart';
 const getWidth = () => window.innerWidth
     || document.documentElement.clientWidth
@@ -9,7 +10,10 @@ let cartClick = false
 const Navbar = () => {
     const navigate = useNavigate()
     const [width, setWidth] = useState(getWidth());
+    const dispatch = useDispatch()
     const items = useSelector(state => state);
+    const isLogin = useSelector(state => state.login.isLogin);
+    
     const handleOpenCart = () => {
         if (cartClick) {
             if (width > 1200) {
@@ -36,16 +40,19 @@ const Navbar = () => {
     }, [])
 
     const logout = () => {
-        localStorage.clear();
-        navigate('/')
+        dispatch(Logout())
     }
 
     useEffect(() => {
         handleOpenCart()
-        // window.$('#myModal').on('hidden.bs.modal', function (e) {
-        //     cartClick=false
-        //   })
     }, [width])
+
+    useEffect(() => {
+        if (isLogin == false) {
+            navigate('/')
+        }
+    }, [isLogin])
+
     return (
         <div>
             <nav className="navbar navbar-expand-md bg-white navbar-light fixed-top" >
@@ -53,14 +60,9 @@ const Navbar = () => {
                     <NavLink to='/' className="navbar-brand" ><img src='/static/images/logo.png' alt='logo' /></NavLink>
                     <div className="collapse navbar-collapse" id="collapsibleNavbar">
                         <ul className="navbar-nav ">
-                            {/* <li className="nav-item">
-                                <NavLink to="/">
-                                    Home
-                                </NavLink>
-                            </li> */}
                             <li className="nav-item ml-2">
                                 {
-                                    localStorage.getItem('auth_token') && (
+                                    isLogin && (
                                         <NavLink to="products">
                                             Products
                                         </NavLink>
@@ -70,7 +72,7 @@ const Navbar = () => {
                         </ul>
                     </div>
                     {
-                        !localStorage.getItem('auth_token') ? (
+                        !isLogin ? (
                             <div className="d-flex auth-sec">
                                 <NavLink to="/" className='mr-2'>
                                     Signin

@@ -1,7 +1,7 @@
-import React,{useEffect,useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, NavLink } from 'react-router-dom';
-import { ADDED_TO_CART, REMOVE_FROM_CART } from '../redux/Action_creators/CartActions';
+import { ADDED_TO_CART, DELETE_ITEM, REMOVE_FROM_CART } from '../redux/Action_creators/CartActions';
 const Cart = () => {
     const cartItems = useSelector(state => state?.cart?.cartItems);
     const dispatch = useDispatch()
@@ -10,8 +10,12 @@ const Cart = () => {
         return sumall
     }
 
+    const removeItem=(item)=>{
+        dispatch(DELETE_ITEM(item))
+    }
+
     return (
-        <div className={cartItems.length>0?'bg-gray cart-content':'bg-white'} >
+        <div className={cartItems.length > 0 ? 'bg-gray cart-content' : 'bg-white'} >
             {
                 cartItems.length > 0 && (
                     <div className='cart-header bg-white p-3 mt-3'>
@@ -23,6 +27,9 @@ const Cart = () => {
                 cartItems.map(item => (
                     <div className='card mt-2 p-3' key={item.id}>
                         <div className='d-flex'>
+                            <div className='d-flex mr-2' onClick={()=>{removeItem(item)}}>
+                                <p className='text-danger'>X</p>
+                            </div>
                             <img height='70px' src={item.imageURL} alt={item.id} />
                             <div className='ml-3'>
                                 <h6><strong>{item.name}</strong></h6>
@@ -31,6 +38,7 @@ const Cart = () => {
                             <div className='total ml-auto'>
                                 <p>Rs {item.quantity * item.price}</p>
                             </div>
+
                         </div>
                     </div>
                 ))
@@ -53,12 +61,12 @@ const Cart = () => {
                 ) : (
                     <div className='cart-empty '>
                         <div className='empty-text'>
-                        <h4><strong>No items in your cart</strong></h4>
-                        <p>your favourite items are just a click away</p>
+                            <h4><strong>No items in your cart</strong></h4>
+                            <p>your favourite items are just a click away</p>
                         </div>
                         <div className='checkout-footer   '>
                             <div className='bg-danger  p-2'>
-                               <NavLink to='/'  className='text-light'>Start Shopping</NavLink>
+                                <NavLink to='/' className='text-light'>Start Shopping</NavLink>
                             </div>
                         </div>
                     </div>

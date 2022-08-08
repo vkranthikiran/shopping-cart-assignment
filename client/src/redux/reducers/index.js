@@ -7,7 +7,7 @@ import { CategoriesReducer } from './Product_Category_Reducer'
 import { RegisterReducer } from './RegisterReducer'
 import { ScreenWidthReducer } from './ScreenWidthReducer'
 
-export const reducers=combineReducers(
+ const reducers=combineReducers(
     {
         banner:BannerReducer,
         product_category:CategoriesReducer,
@@ -18,3 +18,7 @@ export const reducers=combineReducers(
         login:LoginReducer
     }
 )
+
+export default (state,action)=>{
+    return reducers (action.type === "LOGOUT" ? undefined : state, action)
+}
