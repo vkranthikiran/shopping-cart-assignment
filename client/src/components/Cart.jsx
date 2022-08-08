@@ -27,8 +27,8 @@ const Cart = () => {
                 cartItems?.map(item => (
                     <div className='card mt-2 p-3' key={item?.id}>
                         <div className='d-flex'>
-                            <div className='d-flex mr-2' onClick={()=>{removeItem(item)}}>
-                                <p className='text-danger'>X</p>
+                            <div className='d-flex mr-2 ' onClick={()=>{removeItem(item)}}>
+                                <strong><p className='text-danger cancel'>X</p></strong>
                             </div>
                             <img height='70px' src={item?.imageURL} alt={item.id} />
                             <div className='ml-3'>
